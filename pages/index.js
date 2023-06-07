@@ -1,8 +1,20 @@
+import { useRef } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
+  const video1 = useRef(null);
+  const video2 = useRef(null);
+  const video3 = useRef(null);
+  
+  function togglePlay(elementRef) { 
+    if (elementRef.current.paused) 
+      elementRef.current.play(); 
+    else 
+      elementRef.current.pause(); 
+  } 
+  
   return (
     <div className={styles.container}>
       <Head>
@@ -12,43 +24,41 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
 
         <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
+          Passe o mouse encima para tocar o video
         </p>
 
         <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
+          <video
+            id="video1"
             className={styles.card}
+            onMouseOver={() => togglePlay(video1)}
+            onMouseOut={() => togglePlay(video1)}
+            ref={video1}
           >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
+            <source src="/api/video" type="video/mp4" />
+          </video>
 
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+          <video
+            id="video2"
             className={styles.card}
+            onMouseOver={() => togglePlay(video2)}
+            onMouseOut={() => togglePlay(video2)}
+            ref={video2}
           >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+            <source src="/api/video" type="video/mp4" />
+          </video>
+
+          <video
+            id="video3"
+            className={styles.card}
+            onMouseOver={() => togglePlay(video3)}
+            onMouseOut={() => togglePlay(video3)}
+            ref={video3}
+          >
+            <source src="/api/video" type="video/mp4" />
+          </video>
         </div>
       </main>
 
